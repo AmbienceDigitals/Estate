@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { faEdit, faAddressBook } from "@fortawesome/free-solid-svg-icons";
+import { Iproperty } from '../iproperty.interface';
 
 @Component({
   selector: 'app-property-card',
@@ -7,16 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PropertyCardComponent implements OnInit {
 
+  @Input() property:Iproperty
+
+  edit:any = faEdit;
+  contact:any = faAddressBook;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  property: any = {
-    "Id": 1,
-    "Name": "Biria House",
-    "Type": "House",
-    "Price": 120000
-  }
 
 }

@@ -1,9 +1,24 @@
-<div class="card shadow lg col-sm-3">
+
+<div class="card prop">
+    <div class="card-img-wrapper">
         <img src="assets/images/house (4).png" class="card-img-top propImg" alt="housing">
+        <ul class="list-inline text-center member-icons animate">
+            <li class="list-inline-item">
+                <button class="btn btn-primary">
+                    <fa-icon [icon] = edit routerLink = "/property-details/{{property.Id}}"></fa-icon>
+                </button>
+            </li>
+
+            <li class="list-inline-item">
+                <button class="btn btn-primary">
+                    <fa-icon [icon] = contact></fa-icon>
+                </button>
+            </li>
+        </ul>
+    </div>
         <div class="card-body">
-            <h1>{{property.Name}}</h1>
-            <h2>{{property.Type}}</h2>
-            <h3>{{property.Price}}</h3>
+            <h3>{{property.Name}}</h3>
+            <h4>{{property.Type}}</h4>
+            <h4>{{property.Price}}</h4>
         </div>
 </div>
-
