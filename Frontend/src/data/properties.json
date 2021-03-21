@@ -1,41 +1,52 @@
 [
     {
         "Id": 1,
+        "SellRent": 2,
         "Name": "Biria House",
         "Type": "House",
-        "Price": 120000
+        "Price": 120000,
+        "Image": "house_default"
     },
 
     {
         "Id": 2,
+        "SellRent": 1,
         "Name": "Miria House",
         "Type": "Flat",
-        "Price": 140000
+        "Price": 140000,
+        "Image": "house (2)"
     },
 
     {
         "Id": 3,
+        "SellRent": 2,
         "Name": "siria House",
         "Type": "House",
-        "Price": 100000
+        "Price": 100000,
+        "Image": "house (3)"
     },
 
     {
         "Id": 4,
+        "SellRent": 1,
         "Name": "Fairia House",
         "Type": "Flat",
-        "Price": 160000
+        "Price": 160000,
+        "Image": "house (4)"
     },
 
     {
         "Id": 5,
+        "SellRent": 2,
         "Name": "Faniria House",
         "Type": "Duplex",
-        "Price": 180000
+        "Price": 180000,
+        "Image": "house (5)"
     },
 
     {
         "Id": 6,
+        "SellRent": 1,
         "Name": "nairia House",
         "Type": "Villa",
         "Price": 200000

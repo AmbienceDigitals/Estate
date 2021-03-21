@@ -9,10 +9,10 @@ import { Iproperty } from '../iproperty.interface';
 })
 export class PropertyCardComponent implements OnInit {
 
-  @Input() property:Iproperty
+  @Input() property: Iproperty;
 
-  edit:any = faEdit;
-  contact:any = faAddressBook;
+  edit: any = faEdit;
+  contact: any = faAddressBook;
 
   constructor() { }
 
