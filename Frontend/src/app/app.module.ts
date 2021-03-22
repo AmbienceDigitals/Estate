@@ -18,9 +18,13 @@ import { PropertyDetailComponent } from './property/property-detail/property-det
 import { UserRegistrationComponent } from './User/user-registration/user-registration.component';
 import { UserLoginComponent } from './User/user-login/user-login.component';
 
+import { UserServiceService } from './Service/user-service.service';
+import { AlertifyService } from './Service/Alertify.service';
+import { AuthService } from './Service/auth.service';
+
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     PropertyCardComponent,
     PropertyListComponent,
@@ -38,7 +42,12 @@ import { UserLoginComponent } from './User/user-login/user-login.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [HousingService, property_routes],
+  providers: [
+    HousingService,
+     UserServiceService,
+     AlertifyService,
+     AuthService,
+     property_routes],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

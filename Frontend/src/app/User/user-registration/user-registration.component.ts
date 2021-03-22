@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailValidator, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/model/user';
+import { AlertifyService } from 'src/app/Service/Alertify.service';
+import { UserServiceService } from 'src/app/Service/user-service.service';
+
 
 @Component({
   selector: 'app-user-registration',
@@ -9,10 +13,13 @@ import { EmailValidator, FormBuilder, FormControl, FormGroup, Validators } from 
 export class UserRegistrationComponent implements OnInit {
 
   registrationForm: FormGroup;
-  user:any = {};
+  user: User;
+  userSubmitted: boolean;
 
   // Using Form Builder
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private userService: UserServiceService,
+              private alert: AlertifyService) { }
 
   ngOnInit(): void {
     // using normal FormControl
@@ -27,8 +34,8 @@ export class UserRegistrationComponent implements OnInit {
 
   }
 
-  // Form Bulder 
-  createRegistrationForm() {
+  // Form Bulder
+  createRegistrationForm(): void {
     this.registrationForm = this.fb.group({
       userName: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
@@ -38,7 +45,7 @@ export class UserRegistrationComponent implements OnInit {
     }, {validators: this.passwordMatchingValidator});
   }
 
-  //  Cross fieldd validator
+  //  Cross field validator
   passwordMatchingValidator(fg: FormGroup): Validators {
     return fg.get('password').value === fg.get('confirmPassword').value ? null : {notmatched: true};
   }
@@ -60,30 +67,30 @@ export class UserRegistrationComponent implements OnInit {
     return this.registrationForm.get('mobile') as FormControl;
   }
 
-  onSubmit(): void {
+  onSubmit(): void  {
+    //  to check if form values isnt null before submitting
     console.log(this.registrationForm.value);
-    this.user = Object.assign(this.user, this.registrationForm.value);
-    this.addUser(this.user);
-    this.registrationForm.reset();
-
-  }
-
-  addUser(user) {
-    let users = [];
-
-    // conditional statement to check if local storage already had 'users
-    if(localStorage.getItem('Users')) {
-      // json.parse to convert json to string
-      users = JSON.parse(localStorage.getItem('Users'));
-
-      // using rest parameter (spread syntax) to add new user to the array of existing users
-      users = [user, ...users];
+    this.userSubmitted = true;
+    if (this.registrationForm.valid) {
+      // this.user = Object.assign(this.user, this.registrationForm.value);
+      this.userService.addUser(this.userData());
+      this.registrationForm.reset();
+      this.userSubmitted = false;
+      //  using alertify to display sucess message
+      this.alert.success('Congrats, You are successfully registered');
     } else {
-      // if no pre existing users, add new user to the array
-      users = [user];
+      this.alert.error('Kindly provide the required fields');
     }
-    // using local storage to store form values
-    localStorage.setItem('Users', JSON.stringify(users));
+
   }
 
+  // method to map form values
+  userData(): User {
+    return this.user = {
+      userName: this.userName.value,
+      email: this.email.value,
+      password: this.password.value,
+      mobile: this.mobile.value,
+    };
+  }
 }

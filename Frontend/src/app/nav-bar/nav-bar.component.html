@@ -16,23 +16,24 @@
           <a class="nav-link" routerLinkActive = "active" routerLink="/add-property">List Property (Free)</a>
         </li>
       </ul>
-      <!-- <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> -->
 
       <div class="d-flex">
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li *ngIf = "!loggedIn()" class="nav-item">
             <a class="nav-link" 
             routerLinkActive = "active" 
             routerLink="/user/register">Register</a>
           </li>
 
-          <li class="nav-item">
+          <li *ngIf = "!loggedIn()" class="nav-item">
             <a class="nav-link" 
             routerLinkActive = "active" 
             routerLink="/user/login">Login</a>
+          </li>
+
+          <!-- log out nav option using ngif -->
+          <li *ngIf = "loggedIn()" class="nav-item">
+            <a class="nav-link" (click) = "onLogout()">Logout</a>
           </li>
 
         </ul>
