@@ -7,6 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PropertyCardComponent } from './property/property-card/property-card.component';
@@ -33,21 +38,25 @@ import { AuthService } from './Service/auth.service';
     PropertyDetailComponent,
     UserRegistrationComponent,
     UserLoginComponent
-   ],
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
   providers: [
     HousingService,
-     UserServiceService,
-     AlertifyService,
-     AuthService,
-     property_routes],
+    UserServiceService,
+    AlertifyService,
+    AuthService,
+    property_routes],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

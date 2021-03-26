@@ -1,40 +1,60 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">Estate Housing Scheme</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation" (click)="isShown = !isShown" [attr.aria-expanded]="isShown" >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': isShown }" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" [routerLinkActiveOptions] = "{exact:true}" routerLinkActive = "active" aria-current="page" routerLink="/">Buy</a>
+          <a class="nav-link" (click)="isShown = false" [routerLinkActiveOptions] = "{exact:true}" routerLinkActive = "active" aria-current="page" routerLink="/">Buy</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive = "active" routerLink="/rent-property">Rent</a>
+          <a class="nav-link" (click)="isShown = false" routerLinkActive = "active" routerLink="/rent-property">Rent</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive = "active" routerLink="/add-property">List Property (Free)</a>
+          <a class="nav-link" (click)="isShown = false" routerLinkActive = "active" routerLink="/add-property">List Property (Free)</a>
         </li>
       </ul>
 
       <div class="d-flex">
         <ul class="navbar-nav">
           <li *ngIf = "!loggedIn()" class="nav-item">
-            <a class="nav-link" 
+            <a class="nav-link" (click)="isShown = false" 
             routerLinkActive = "active" 
             routerLink="/user/register">Register</a>
           </li>
 
           <li *ngIf = "!loggedIn()" class="nav-item">
-            <a class="nav-link" 
+            <a class="nav-link" (click)="isShown = false" 
             routerLinkActive = "active" 
             routerLink="/user/login">Login</a>
           </li>
 
           <!-- log out nav option using ngif -->
-          <li *ngIf = "loggedIn()" class="nav-item">
+          <!-- <li *ngIf = "loggedIn()" class="nav-item">
             <a class="nav-link" (click) = "onLogout()">Logout</a>
-          </li>
+          </li> -->
+
+          <div *ngIf = "loggedIn()" class="dropdown mr-5" dropdown>
+            <a href="" class="dropdown-toggle text-light" dropdownToggle (click) = "false">
+              Welcome {{loggedinUser}}
+            </a>
+
+            <div class="dropdown-menu" *dropdownMenu>
+              <a href="" class="dropdown-item">
+                <fa-icon [icon] = dashboard></fa-icon> View Dashboard </a>
+              
+                <a href="" class="dropdown-item">
+                <fa-icon [icon] = profile></fa-icon> My Profile </a>
+              
+                <a href="" class="dropdown-item">
+                <fa-icon [icon] = password></fa-icon> Change Password </a>
+
+                <a (click) = "onLogout()" href="" class="dropdown-item">
+                  <fa-icon [icon] = logout></fa-icon> Logout </a>
+            </div>
+          </div>
 
         </ul>
       </div>
