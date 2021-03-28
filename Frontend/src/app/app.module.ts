@@ -11,7 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+<<<<<<< HEAD
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+=======
+>>>>>>> acc6d53fedac92600064cb3cc9e7a91a0ea4c711
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,8 +53,12 @@ import { AuthService } from './Service/auth.service';
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+<<<<<<< HEAD
     ButtonsModule.forRoot(),
     BsDatepickerModule.forRoot()
+=======
+    ButtonsModule.forRoot()
+>>>>>>> acc6d53fedac92600064cb3cc9e7a91a0ea4c711
   ],
   providers: [
     HousingService,
