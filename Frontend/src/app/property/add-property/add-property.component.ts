@@ -20,6 +20,15 @@ export class AddPropertyComponent implements OnInit {
     // will come from masters
   propertyTypes: Array<string> = ['House', 'Apartment', 'Duplex'];
   furnishTypes: Array<string> = ['Fully', 'Semi', 'Unfurnished'];
+
+  propertyView: Iproperty = {
+    Id: null,
+    Name: null,
+    Price: null,
+    SellRent: null,
+    Type: null
+  };
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {

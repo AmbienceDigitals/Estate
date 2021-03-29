@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faEdit, faAddressBook } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faAddressBook } from '@fortawesome/free-solid-svg-icons';
 import { Iproperty } from '../iproperty.interface';
 
 @Component({
