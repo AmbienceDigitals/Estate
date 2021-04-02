@@ -52,6 +52,9 @@ export class AddPropertyComponent implements OnInit {
         SellRent: ['1', Validators.required],
         PType: [null, Validators.required],
         Name: [null, Validators.required],
+        BHK: [null, Validators.required],
+        FType: [null, Validators.required],
+        City: [null, Validators.required]
       }),
 
       PriceInfo: this.fb.group({
@@ -66,7 +69,7 @@ export class AddPropertyComponent implements OnInit {
         FloorNo: [null],
         TotalFloor: [null],
         Adress: [null],
-        LandMark: [null]
+        Landmark: [null]
       }),
 
       OtherInfo: this.fb.group({
@@ -101,41 +104,143 @@ export class AddPropertyComponent implements OnInit {
         return this.addPropertyForm.controls.OtherInfo as FormGroup;
       }
 
-  //#endregion
+  //#endregion <FormGroups
 
   //#region <FormControls>
+
+    //#region <BasicInfo Form Controls>
+
     get SellRent(): FormControl {
       return this.BasicInfo.controls.SellRent as FormControl;
     }
+
+    get PType(): FormControl {
+      return this.BasicInfo.controls.PType as FormControl;
+    }
+
+    get Name(): FormControl {
+      return this.BasicInfo.controls.Name as FormControl;
+    }
+
+    get FType(): FormControl {
+      return this.BasicInfo.controls.FType as FormControl;
+    }
+
+    get BHK(): FormControl {
+      return this.BasicInfo.controls.BHK as FormControl;
+    }
+
+    get City(): FormControl {
+      return this.BasicInfo.controls.City as FormControl;
+    }
+
+    //#endregion <BasicInfo Form Controls>
+
+    //#region <PriceInfo Form Controls>
 
     get Price(): FormControl {
       return this.PriceInfo.controls.Price as FormControl;
     }
 
+    get Security(): FormControl {
+      return this.PriceInfo.controls.Security as FormControl;
+    }
+
+    get Maintenance(): FormControl {
+      return this.PriceInfo.controls.Maintenance as FormControl;
+    }
+
+    get BuiltArea(): FormControl {
+      return this.PriceInfo.controls.BuiltArea as FormControl;
+    }
+
+    get CarpetArea(): FormControl {
+      return this.PriceInfo.controls.CarpetArea as FormControl;
+    }
+
+    //#endregion <PriceInfo Form Controls>
+
+    //#region <AddressInfo Form Controls>
+    get FLoorNo(): FormControl {
+      return this.AddressInfo.controls.FLoorNo as FormControl;
+    }
+
+    get TotalFLoor(): FormControl {
+      return this.AddressInfo.controls.TotalFLoor as FormControl;
+    }
+
+    get Address(): FormControl {
+      return this.AddressInfo.controls.Address as FormControl;
+    }
+
+    get Landmark(): FormControl {
+      return this.AddressInfo.controls.Landmark as FormControl;
+    }
+    //#endregion <AddressInfo Form Controls>
+
+    //#region <OtherInfo Form Controls>
+
     get RTM(): FormControl {
       return this.OtherInfo.controls.RTM as FormControl;
     }
 
-  //#endregion
+    get PossessionOn(): FormControl {
+      return this.OtherInfo.controls.PossessionOn as FormControl;
+    }
 
-//#endregion
+    get AOP(): FormControl {
+      return this.OtherInfo.controls.AOP as FormControl;
+    }
+
+    get Gated(): FormControl {
+      return this.OtherInfo.controls.Gated as FormControl;
+    }
+
+    get MainEntrance(): FormControl {
+      return this.OtherInfo.controls.MainEntrance as FormControl;
+    }
+
+    get Description(): FormControl {
+      return this.OtherInfo.controls.Description as FormControl;
+    }
+
+      //#endregion <OtherInfo Form Controls>
+
+  //#endregion <FormControls>
+
+//#endregion <GetterMettods>
 
   onSubmit(): void {
     this.nextClicked = true;
+    if (this.allTabsValid()) {
+      console.log('Congrats, Form submitted');
+      console.log(this.addPropertyForm);
+    } else {
+      console.log('Pls review the form and provide valid entries');
+    }
+  }
+
+  allTabsValid(): boolean {
     if (this.BasicInfo.invalid) {
       this.formTabs.tabs[0].active = true;
-      return;
+      return false;
     }
 
     if (this.PriceInfo.invalid) {
       this.formTabs.tabs[1].active = true;
-      return;
+      return false;
     }
 
-    console.log('Congrats, Form submitted');
-    console.log('SellRent = ' + this.addPropertyForm.value.BasicInfo.SellRent);
-    console.log(this.addPropertyForm);
+    if (this.AddressInfo.invalid) {
+      this.formTabs.tabs[2].active = true;
+      return false;
+    }
 
+    if (this.OtherInfo.invalid) {
+      this.formTabs.tabs[3].active = true;
+      return false;
+    }
+    return true;
   }
 
   // onBack() {
