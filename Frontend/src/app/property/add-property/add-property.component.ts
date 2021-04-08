@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { IProperty } from 'src/app/model/iproperty';
 import { IPropertyBase } from 'src/app/model/ipropertybase';
 
 
@@ -16,30 +17,67 @@ export class AddPropertyComponent implements OnInit {
   // @ViewChild('form') addPropertyForm: NgForm;
   @ViewChild('formTabs') formTabs: TabsetComponent;
   // SellRent = 1;
-  @Input() property: IPropertyBase;
+  @Input() property: IProperty;
 
   nextClicked: boolean;
 
   addPropertyForm: FormGroup;
 
     // will come from masters
+  bhks: Array<number> = [1, 2, 3, 4];
   propertyTypes: Array<string> = ['House', 'Apartment', 'Duplex'];
   furnishTypes: Array<string> = ['Fully', 'Semi', 'Unfurnished'];
 
-  propertyView: IPropertyBase = {
+  propertyView: IProperty = {
+    //#region (Basic Info Tab)
+
     Id: null,
-    Name: null,
-    Price: null,
     SellRent: null,
+    BHK: null,
     PType: null,
     FType: null,
-    BHK: null,
-    BuiltArea: null,
+    Name: null,
     City: null,
-    RTM: null
+
+    //#endregion (Basic Info Tab)
+
+    //#region  (Price Info Tab)
+
+    Price: null,
+    Security: null,
+    Maintenance: null,
+    BuiltArea: null,
+    CarpetArea: null,
+
+    //#endregion (Price Info Tab)
+
+    //#region  (Address Info Tab)
+
+    FloorNo: null,
+    TotalFloor: null,
+    Address: null,
+    Landmark: null,
+
+    //#endregion (Address Info Tab)
+
+    //#region  (Other Info Tab)
+
+    RTM: null,
+    AOP: null,
+    PossessionOn: null,
+    Gated: null,
+    MainEntrance: null,
+    Description: null,
+
+    //#endregion (Other Info Tab)
+
+    //#region  (Photo Tab)
+    Image: null
+    //#endregion (Photo Tab)
   };
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.createAddPropertyForm();
@@ -50,15 +88,15 @@ export class AddPropertyComponent implements OnInit {
       // Grouping form controls
       BasicInfo: this.fb.group({
         SellRent: ['1', Validators.required],
-        PType: [null, Validators.required],
-        Name: [null, Validators.required],
-        BHK: [null, Validators.required],
-        FType: [null, Validators.required],
-        City: [null, Validators.required]
+        BHK: [, Validators.required],
+        PType: [, Validators.required],
+        FType: [, Validators.required],
+        Name: [, Validators.required],
+        City: [, Validators.required]
       }),
 
       PriceInfo: this.fb.group({
-        Price: ['', Validators.required],
+        Price: [null, Validators.required],
         BuiltArea: [null, Validators.required],
         CarpetArea: [null],
         Security: [null],
@@ -68,7 +106,7 @@ export class AddPropertyComponent implements OnInit {
       AddressInfo: this.fb.group({
         FloorNo: [null],
         TotalFloor: [null],
-        Adress: [null],
+        Address: [null],
         Landmark: [null]
       }),
 
@@ -79,6 +117,10 @@ export class AddPropertyComponent implements OnInit {
         Gated: [null],
         MainEntrance: [null],
         Description: [null]
+      }),
+
+      Photo: this.fb.group({
+        Image: [null]
       })
       });
   }
@@ -102,6 +144,10 @@ export class AddPropertyComponent implements OnInit {
 
       get OtherInfo(): FormGroup {
         return this.addPropertyForm.controls.OtherInfo as FormGroup;
+      }
+
+      get Photo(): FormGroup {
+        return this.addPropertyForm.controls.Photo as FormGroup;
       }
 
   //#endregion <FormGroups
@@ -206,6 +252,14 @@ export class AddPropertyComponent implements OnInit {
 
       //#endregion <OtherInfo Form Controls>
 
+       //#region <Photo Form Controls>
+
+       get Image(): FormControl {
+        return this.Photo.controls.Image as FormControl;
+      }
+
+        //#endregion <Photo Form Controls>
+
   //#endregion <FormControls>
 
 //#endregion <GetterMettods>
@@ -217,6 +271,8 @@ export class AddPropertyComponent implements OnInit {
       console.log(this.addPropertyForm);
     } else {
       console.log('Pls review the form and provide valid entries');
+      console.log(this.BasicInfo);
+      console.log(this.OtherInfo);
     }
   }
 
@@ -239,6 +295,10 @@ export class AddPropertyComponent implements OnInit {
     if (this.OtherInfo.invalid) {
       this.formTabs.tabs[3].active = true;
       return false;
+    }
+    if (this.Photo.invalid) {
+      this.formTabs.tabs[4].active = true;
+      return true;
     }
     return true;
   }

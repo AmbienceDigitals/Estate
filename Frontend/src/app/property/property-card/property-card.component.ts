@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faEdit, faAddressBook } from '@fortawesome/free-solid-svg-icons';
+import { IProperty } from 'src/app/model/iproperty';
 import { IPropertyBase } from 'src/app/model/ipropertybase';
 
 @Component({
@@ -10,7 +11,7 @@ import { IPropertyBase } from 'src/app/model/ipropertybase';
 export class PropertyCardComponent implements OnInit {
 
   //  input to transfer the value of property from one component to another
-  @Input() property: IPropertyBase;
+  @Input() property: IProperty;
 
   // input to hide icons conditionally
   @Input() hideIcons: boolean;
